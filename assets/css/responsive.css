@@ -1,0 +1,25 @@
+@media (max-width: 960px) and (min-width: 240px) {
+  .container {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .container > article {
+    margin: 0 80px 0 80px !important;
+  }
+
+  .container > .mast {
+    padding: 40px 80px 0 80px !important;
+  }
+}
+
+@media (max-width: 640px) and (min-width: 240px) {
+
+  .container > .mast {
+    padding: 40px 40px 0 40px !important;
+  }
+
+  .container > article {
+    margin: 0 40px 0 40px !important;
+  }
+}
