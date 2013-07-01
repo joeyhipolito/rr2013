@@ -53,7 +53,11 @@
       tpl_path: ''
     };
 
-    ui.prototype.build = function() {};
+    ui.prototype.build = function() {
+      return $('#exam-navigation').css({
+        'display': 'hidden'
+      });
+    };
 
     ui.prototype.bindEvents = function() {
       var drop, logout, submit, ul, upload,
@@ -133,14 +137,7 @@
             });
           });
           return jqXHR = data.submit().done(function(re, status, jqXHR) {
-            var message;
-            message = 'Uploading failed. Make sure it is a zip file.';
-            if (re === 'true') {
-              message = 'Uploading successful.';
-            } else if (re === 'false') {
-              message = 'Uploading failed. Make sure it is a zip file.';
-            }
-            upload.find('.result').append(message);
+            upload.find('.result').append(re);
             return setTimeout(function() {
               return upload.find('.result').html('');
             }, 3000);
@@ -162,8 +159,19 @@
           return data.context.addClass('error');
         }
       });
-      return $(document).on('drop dragover', function(e) {
+      $(document).on('drop dragover', function(e) {
         return e.preventDefault();
+      });
+      return $('#exam-navigation').find('.toggle').on('click', function(e) {
+        var spanClass;
+        e.preventDefault();
+        $(this).parent().toggleClass('shown');
+        spanClass = $(this).find('span').attr('class');
+        if (spanClass === 'icon-plus-sign') {
+          return $(this).find('span').removeClass().addClass('icon-minus-sign');
+        } else {
+          return $(this).find('span').removeClass().addClass('icon-plus-sign');
+        }
       });
     };
 
@@ -332,7 +340,7 @@
       }).promise().done(function() {
         return setTimeout(function() {
           return _this.status();
-        }, 300);
+        }, 3000);
       }).always(function() {
         return ui.reload();
       });

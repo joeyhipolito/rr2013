@@ -17,11 +17,12 @@ if(isset($_FILES['upl']) && $_FILES['upl']['error'] == 0) {
   $ext = pathinfo($_FILES['upl']['name'], PATHINFO_EXTENSION);
 
   if(!in_array(strtolower($ext), $whitelist) || in_array(strtolower($ext), $blacklist)) {
-    die(false);
+    echo 'Invalid File Type';
+    exit;
   }
 
   if(move_uploaded_file($_FILES['upl']['tmp_name'], $uploadfile)) {
-    echo true;
+    echo 'File upload successful.';
     exit;
   }
 }

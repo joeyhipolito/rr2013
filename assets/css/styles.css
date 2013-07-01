@@ -34,6 +34,15 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'WisdomScript';
+    src: url('../fonts/wisdom-script/wisdom_script-webfont.eot');
+    src: url('../fonts/wisdom-script/wisdom_script-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/wisdom-script/wisdom_script-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html, body {
   -webkit-font-smoothing: antialiased;
   font: 14px ProximaNova;
@@ -61,6 +70,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   text-rendering: optimizelegibility;
 }
+
 
 /* Designing from top to bottom */
 
@@ -613,6 +623,123 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
 }
 
+#exam-navigation {
+  bottom: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  -ms-box-sizing:     border-box;
+  -o-box-sizing:      border-box;
+  box-sizing:         border-box;
+  left: -20%;
+  position: fixed;
+  top: 0;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  min-width: 200px;
+  width: 20%;
+  z-index: 2;
+}
+
+#exam-navigation > .toggle {
+  background: rgba(0,0,0,0.8);
+  border: 1px solid rgba(0,0,0,1);
+  border-left: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  height: 32px;
+  line-height: 32px;
+  position: absolute;
+  right: -32px;
+  text-align: center;
+  width: 32px;
+}
+
+#exam-navigation.shown {
+  left: 0;
+}
+
+#exam-navigation > h1 {
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: rgba(50,50,50,1);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  -ms-box-sizing:     border-box;
+  -o-box-sizing:      border-box;
+  box-sizing:         border-box;
+  font: 1.5em WisdomScript;
+  margin-bottom: 10px;
+  text-align: center;
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
+}
+
+#exam-navigation ul {
+  margin: 0;
+}
+
+#exam-navigation ul > li {
+  background: rgba(0,0,0,0.6);
+  border-right: 3px solid rgba(68,85,68,1);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  -ms-box-sizing:     border-box;
+  -o-box-sizing:      border-box;
+  box-sizing:         border-box;
+  color: #ededed;
+  font: 1em ProximaNova;
+  list-style: none;
+  margin-bottom: 1px;
+  padding: 8px 0;
+  text-align: left;
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -ms-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  width: 100%;
+}
+
+#exam-navigation ul > li:last-of-type {
+  margin-bottom: 0;
+}
+
+#exam-navigation ul > li:hover {
+  background: rgba(255,255,255,0.3);
+  border-color: rgba(90,120,90,1);
+  color: rgba(40,40,40,1);
+}
+
+#exam-navigation ul > li a:link,
+#exam-navigation ul > li a:active,
+#exam-navigation ul > li a:visited {
+  color: #ededed;
+  display: block;
+  text-decoration: none;
+}
+
+#exam-navigation ul > li:hover a,
+#exam-navigation ul > li:hover a:link,
+#exam-navigation ul > li:hover a:active,
+#exam-navigation ul > li:hover a:visited,
+#exam-navigation ul > li a:hover {
+  color: rgba(40,40,40,1);
+  text-decoration: none;
+}
+
+#exam-navigation ul > li:hover span {
+  color: #333;
+}
+
+#exam-navigation ul > li span {
+  color: #ccc;
+  margin: 0 15px 0 8px;
+}
+
+/* exam navigation */ 
 
 #content {
   background-image: url('../img/pattern.webp');
@@ -651,41 +778,6 @@ h1, h2, h3, h4, h5, h6 {
   text-indent: 30px;
 }
 
-#content-nav {
-  background: rgba(0,0,0,0.7);
-  border: 1px solid #000;
-  -moz-border-radius: 10px 0 10px 0;
-  -webkit-border-radius: 10px 0 10px 0;
-  border-radius: 10px 0 10px 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing:    border-box;
-  -ms-box-sizing:     border-box;
-  -o-box-sizing:      border-box;
-  box-sizing:         border-box;
-  color: #fff;
-  display: none;
-  height: auto;
-  padding: 8px;
-  position: fixed;
-  top: 80px;
-  right: 100px;
-  min-width: 240px;
-  width: 240px;
-  z-index: 999999;
-}
-
-#content-nav > h2 {
-  border-bottom: 1px solid #000;
-  font-size: 1.4em;
-  text-align: center;
-}
-
-#content-nav > .container {
-  width: 100%;
-}
-
-
-
 code {
   background: rgba(240,240,240,1);
   color: rgba(35,85,105,1);
@@ -709,8 +801,6 @@ ol > li > ol > li, ul > li > ol > li {
 ol > li > ol > li code, ul > li > ol > li code {
   font-size: 1em;
 }
-
-
 
 
 .mast {

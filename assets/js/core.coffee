@@ -29,6 +29,8 @@ class Rcrtmnt.ui
     app_path: ''
     tpl_path: ''
   build: ->
+    $('#exam-navigation').css
+      'display': 'hidden'
   bindEvents: ->
     # logout
     logout = $('#lnk-logout');
@@ -102,12 +104,12 @@ class Rcrtmnt.ui
             tpl.remove();
         jqXHR = data.submit()
                     .done (re, status, jqXHR) ->
-                      message = 'Uploading failed. Make sure it is a zip file.';
-                      if re == 'true'
-                        message = 'Uploading successful.'
-                      else if re == 'false'
-                        message = 'Uploading failed. Make sure it is a zip file.';
-                      upload.find('.result').append message;
+                      # if re == 'true'
+                      #   message = 'Uploading successful.'
+                      # else if re == 'false'
+                      #   message = 'Uploading failed. Make sure it is a zip file.';
+                      # alert re;
+                      upload.find('.result').append re;
                       setTimeout ->
                         upload.find('.result').html('');
                       , 3000
@@ -125,6 +127,16 @@ class Rcrtmnt.ui
       );
     $(document).on 'drop dragover', (e) ->
       e.preventDefault();
+    # opening and closing navigation
+    $('#exam-navigation').find('.toggle').on 'click', (e) ->
+      e.preventDefault();
+      $(@).parent().toggleClass('shown');
+      spanClass = $(@).find('span').attr('class');
+      if spanClass is 'icon-plus-sign'
+        $(@).find('span').removeClass().addClass('icon-minus-sign');
+      else
+        $(@).find('span').removeClass().addClass('icon-plus-sign');
+      
   reload: ->
     rr = new Rcrtmnt;
     if rr.getStatus() isnt 1
@@ -169,10 +181,26 @@ class Rcrtmnt.ui
         re = JSON.parse re;
         $.get("#{@variables.app_path}/views/exam-cache/#{re.division}.html")
         .done (exam) ->
+          # load the exam
           $('#content').html(exam).fadeIn('fast')
           .find('.advanced').slideToggle()
           .parent().find('.toggle-advanced').slideToggle();
+          # find titles and append to exam-navigation
+          # blkExam = $('#exam-navigation');
+          # ul = blkExam.find('ul');
+          # html = $(exam);
+          # html.find('article').each (k,v) ->
+          #   tpl = $('<li><a href="#"><span class="icon-chevron-right"></span></a></li>');
+          #   attrid = $(v).attr('id');
+          #   title = $(v).find('.title').text();
+          #   tpl.find('a').attr('href', "##{attrid}").append(title);
+          #   ul.append tpl;
+          #   if $(v).hasClass('advanced')
+          #     tpl.addClass('advanced').hide();
+          # blkExam.toggleClass('shown')
+          # blkExam.find('.toggle').find('span').removeClass().addClass('icon-minus-sign')
   goHardCore: ->
+    # $('#exam-navigation').find('li.advanced').toggleClass('show');
     btnAdvanced = $('#go-hard');
     btnAdvancedText = 'Go Hard Core!';
     btnAdvancedTextCurrent = btnAdvanced.text();
@@ -237,7 +265,7 @@ class Rcrtmnt.login
     .done =>
       setTimeout(=>
         @status();
-      ,300);
+      ,3000);
     .always ->
       ui.reload();
 

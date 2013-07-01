@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
   <link href="assets/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body>
   <div class="overlay">
@@ -28,16 +29,16 @@
             <div class="dropdown">
               <ul>
                 <li id="lnk-home" >
-                  <a href="#home"><span class="icon-home"></span> Home</a>
+                  <a href="#home"><span class="icon-home"></span>Home</a>
                 </li>
                 <li id="lnk-howto">
-                  <a href="#howto"><span class="icon-info"></span> How To Submit</a>
+                  <a href="#howto"><span class="icon-info"></span>How To Submit</a>
                 </li>
                 <li id="lnk-submit">
-                  <a href="#submit"><span class="icon-upload-alt"></span> Submit</a>
+                  <a href="#submit"><span class="icon-upload-alt"></span>Submit</a>
                 </li>
                 <li id="lnk-logout">
-                  <a href="#logout"><span class="icon-off"></span> Log Out</a>
+                  <a href="#logout"><span class="icon-off"></span>Log Out</a>
                 </li>
                 
               </ul>
