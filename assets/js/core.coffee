@@ -15,10 +15,15 @@ class Rcrtmnt
     @variables.status = v;
   getStatus: ->
     return @variables.status;
+  setEndDate: (v) ->
+    @variables.endDate = v;
+  getEndDate: ->
+    return @variables.endDate;
   variables:
     app_path: 'app/'
     tpl_path: 'app/views/tpl'
     status: 0
+    endDate: ''
 
 class Rcrtmnt.ui
   constructor: () ->
@@ -37,6 +42,7 @@ class Rcrtmnt.ui
     logout.on 'click', (e) =>
       e.preventDefault();
       e.stopPropagation();
+      @reload();
       $('.rnd-user-nav').removeAttr('style');
       $.post "#{@variables.app_path}logout.php", {}, (e) ->
         console.log e;
@@ -128,14 +134,14 @@ class Rcrtmnt.ui
     $(document).on 'drop dragover', (e) ->
       e.preventDefault();
     # opening and closing navigation
-    $('#exam-navigation').find('.toggle').on 'click', (e) ->
-      e.preventDefault();
-      $(@).parent().toggleClass('shown');
-      spanClass = $(@).find('span').attr('class');
-      if spanClass is 'icon-plus-sign'
-        $(@).find('span').removeClass().addClass('icon-minus-sign');
-      else
-        $(@).find('span').removeClass().addClass('icon-plus-sign');
+    # $('#exam-navigation').find('.toggle').on 'click', (e) ->
+    #   e.preventDefault();
+    #   $(@).parent().toggleClass('shown');
+    #   spanClass = $(@).find('span').attr('class');
+    #   if spanClass is 'icon-plus-sign'
+    #     $(@).find('span').removeClass().addClass('icon-minus-sign');
+    #   else
+    #     $(@).find('span').removeClass().addClass('icon-plus-sign');
       
   reload: ->
     rr = new Rcrtmnt;
@@ -180,11 +186,23 @@ class Rcrtmnt.ui
       .then (re) =>
         re = JSON.parse re;
         $.get("#{@variables.app_path}/views/exam-cache/#{re.division}.html")
-        .done (exam) ->
+        .done (exam) =>
           # load the exam
           $('#content').html(exam).fadeIn('fast')
           .find('.advanced').slideToggle()
           .parent().find('.toggle-advanced').slideToggle();
+          # start counter
+          $.get("#{@variables.app_path}duration.php")
+          .done (re) ->
+            rr.setEndDate(re.end_date);
+            endDate = rr.getEndDate(); # "June 7, 2087 15:03:25";
+            console.log rr.getEndDate();
+            $('#countdown').countdown(
+              date: endDate
+              render: (data) -> 
+                $(this.el).html(data.days + " <span>days</span> " + this.leadingZeros(data.hours, 2) + " <span>hrs</span> " + this.leadingZeros(data.min, 2) + " <span>min</span> " + this.leadingZeros(data.sec, 2) + " <span>sec</span>");
+              );
+
           # find titles and append to exam-navigation
           # blkExam = $('#exam-navigation');
           # ul = blkExam.find('ul');

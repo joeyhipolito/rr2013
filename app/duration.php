@@ -13,8 +13,10 @@ if (!isset($_SESSION['user'])) {
   $stmt->execute(array(':sn' => $applicant));
   $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+  $date = strtotime($result['date_to_end']);
+
   $response['status'] = true;
-  $response['end_date'] = $result['date_to_end'];
+  $response['end_date'] = date('F j, Y H:i:s', $date);
 
 }
 

@@ -30,10 +30,19 @@
       return this.variables.status;
     };
 
+    Rcrtmnt.prototype.setEndDate = function(v) {
+      return this.variables.endDate = v;
+    };
+
+    Rcrtmnt.prototype.getEndDate = function() {
+      return this.variables.endDate;
+    };
+
     Rcrtmnt.prototype.variables = {
       app_path: 'app/',
       tpl_path: 'app/views/tpl',
-      status: 0
+      status: 0,
+      endDate: ''
     };
 
     return Rcrtmnt;
@@ -66,6 +75,7 @@
       logout.on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
+        _this.reload();
         $('.rnd-user-nav').removeAttr('style');
         return $.post("" + _this.variables.app_path + "logout.php", {}, function(e) {
           return console.log(e);
@@ -159,19 +169,8 @@
           return data.context.addClass('error');
         }
       });
-      $(document).on('drop dragover', function(e) {
+      return $(document).on('drop dragover', function(e) {
         return e.preventDefault();
-      });
-      return $('#exam-navigation').find('.toggle').on('click', function(e) {
-        var spanClass;
-        e.preventDefault();
-        $(this).parent().toggleClass('shown');
-        spanClass = $(this).find('span').attr('class');
-        if (spanClass === 'icon-plus-sign') {
-          return $(this).find('span').removeClass().addClass('icon-minus-sign');
-        } else {
-          return $(this).find('span').removeClass().addClass('icon-plus-sign');
-        }
       });
     };
 
@@ -240,7 +239,19 @@
         return $.get("" + this.variables.app_path + "exam.php").then(function(re) {
           re = JSON.parse(re);
           return $.get("" + _this.variables.app_path + "/views/exam-cache/" + re.division + ".html").done(function(exam) {
-            return $('#content').html(exam).fadeIn('fast').find('.advanced').slideToggle().parent().find('.toggle-advanced').slideToggle();
+            $('#content').html(exam).fadeIn('fast').find('.advanced').slideToggle().parent().find('.toggle-advanced').slideToggle();
+            return $.get("" + _this.variables.app_path + "duration.php").done(function(re) {
+              var endDate;
+              rr.setEndDate(re.end_date);
+              endDate = rr.getEndDate();
+              console.log(rr.getEndDate());
+              return $('#countdown').countdown({
+                date: endDate,
+                render: function(data) {
+                  return $(this.el).html(data.days + " <span>days</span> " + this.leadingZeros(data.hours, 2) + " <span>hrs</span> " + this.leadingZeros(data.min, 2) + " <span>min</span> " + this.leadingZeros(data.sec, 2) + " <span>sec</span>");
+                }
+              });
+            });
           });
         });
       }

@@ -714,7 +714,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #exam-navigation ul > li a:link,
-#exam-navigation ul > li a:active,
+#exam-navigatiocxn ul > li a:active,
 #exam-navigation ul > li a:visited {
   color: #ededed;
   display: block;
@@ -724,7 +724,7 @@ h1, h2, h3, h4, h5, h6 {
 #exam-navigation ul > li:hover a,
 #exam-navigation ul > li:hover a:link,
 #exam-navigation ul > li:hover a:active,
-#exam-navigation ul > li:hover a:visited,
+#exam-navigation ul > li:hover  a:visited,
 #exam-navigation ul > li a:hover {
   color: rgba(40,40,40,1);
   text-decoration: none;
@@ -740,6 +740,52 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* exam navigation */ 
+
+/* countdown */
+
+#countdown {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+}
+
+.dash {
+  width: 65px;
+  background: transparent url('../images/dash.png') 0 0 no-repeat;
+  float: left;
+  margin-left: 0px;
+  position: relative;
+  text-align: center;
+}
+
+.dash .digit {
+  background: #333;
+  color: #fff;
+  font-size: 15pt;
+  font-weight: 800;
+  float: left;
+  width: 24px;
+  padding: 5px 0;
+  text-align: center;
+  font-family: inherit;
+  position: relative;
+  margin: 1px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.dash_title {
+  display: block;
+  font-size: 7.5pt;
+  margin-bottom: 5px;
+  text-align: left;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight:100;
+}
 
 #content {
   background-image: url('../img/pattern.webp');
@@ -816,6 +862,7 @@ ol > li > ol > li code, ul > li > ol > li code {
   color: #fff;
   height: 200px;
   padding: 50px 100px 0 100px;
+  position: relative;
 }
 
 .mast > h2 {
