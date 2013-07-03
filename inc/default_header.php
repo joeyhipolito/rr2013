@@ -20,7 +20,7 @@
             <img src="assets/img/user-avatar.png">
           </div>
           <!-- user first name here -->
-          <a class="user" href="#">rnd-user</a>
+          <a class="user" href="#">rnd-applicant</a>
 
           <span class="icon-reorder rnd-span-block"></span>
           <div class="triangle"></div>

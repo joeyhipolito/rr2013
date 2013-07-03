@@ -43,11 +43,27 @@
     font-style: normal;
 }
 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #000000;
+}
+
+
 html, body {
   -webkit-font-smoothing: antialiased;
   font: 14px ProximaNova;
   height: 100%;
   width: 100%;
+  position: relative;
 }
 
 button {
@@ -212,7 +228,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .rnd-user-nav .dropdown > ul > li:hover {
-  background: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.8);
   border-color: rgba(90,120,90,1);
   color: rgba(68,85,68,1);
 }
@@ -750,41 +766,52 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 2;
 }
 
-.dash {
-  width: 65px;
-  background: transparent url('../images/dash.png') 0 0 no-repeat;
-  float: left;
-  margin-left: 0px;
-  position: relative;
-  text-align: center;
+#howto {
+  background: rgba(255,255,255,0.95);
+  border: 1px solid #fff;
+  left: 50%;
+  height: 80%;
+  margin-left: -40%;
+  margin-top: -20%;
+  overflow: auto;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  width: 80%;
+  z-index: 999;
 }
 
-.dash .digit {
-  background: #333;
-  color: #fff;
-  font-size: 15pt;
-  font-weight: 800;
-  float: left;
-  width: 24px;
-  padding: 5px 0;
-  text-align: center;
-  font-family: inherit;
-  position: relative;
-  margin: 1px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+#howto .close {
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
-.dash_title {
-  display: block;
-  font-size: 7.5pt;
-  margin-bottom: 5px;
-  text-align: left;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight:100;
+#howto img {
+  display: inline-block;
+}
+
+#howto h1, #howto h2, #howto p, #howto ul, #howto li {
+  color: #333;
+  list-style: none;
+}
+
+#howto li {
+  line-height: 2em;
+}
+
+#howto li span {
+  margin-right: 10px
+}
+
+#howto h1 {
+  font: 3em ProximaNovaLight;
+}
+
+#howto h2 {
+  font: 2em ProximaNovaLight;
+  text-transform: none;
 }
 
 #content {

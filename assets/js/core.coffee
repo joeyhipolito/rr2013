@@ -21,7 +21,7 @@ class Rcrtmnt
     return @variables.endDate;
   variables:
     app_path: 'app/'
-    tpl_path: 'app/views/tpl'
+    tpl_path: 'app/views/tpl/'
     status: 0
     endDate: ''
 
@@ -142,7 +142,22 @@ class Rcrtmnt.ui
     #     $(@).find('span').removeClass().addClass('icon-minus-sign');
     #   else
     #     $(@).find('span').removeClass().addClass('icon-plus-sign');
-      
+    
+    # howto submit
+    $('#lnk-howto').on 'click', (e) =>
+      e.preventDefault();
+      if $('#howto').length <= 0
+        $.get("#{@variables.tpl_path}howto.tpl")
+        .done (tpl) ->
+          $('body').append tpl;
+      else
+        $('#howto').remove();
+    $('body').on 'click', '#howto .close', (e) ->
+      e.preventDefault();
+      $('#howto').remove();
+    $('body').on 'click', '#wrap', (e) ->
+      e.preventDefault();
+      $('#howto').remove();
   reload: ->
     rr = new Rcrtmnt;
     if rr.getStatus() isnt 1
@@ -243,6 +258,10 @@ class Rcrtmnt.ui
         top: "#{form.height()}px"
         display: 'block'
       );
+    if status == 0 && (onLogin == false || onLogin == true)
+      upload = $('#upload');
+      if upload.hasClass('show')
+        upload.toggleClass('show');
 class Rcrtmnt.login
   constructor: () ->
     rr = new Rcrtmnt;

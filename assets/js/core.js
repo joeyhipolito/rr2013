@@ -40,7 +40,7 @@
 
     Rcrtmnt.prototype.variables = {
       app_path: 'app/',
-      tpl_path: 'app/views/tpl',
+      tpl_path: 'app/views/tpl/',
       status: 0,
       endDate: ''
     };
@@ -169,8 +169,26 @@
           return data.context.addClass('error');
         }
       });
-      return $(document).on('drop dragover', function(e) {
+      $(document).on('drop dragover', function(e) {
         return e.preventDefault();
+      });
+      $('#lnk-howto').on('click', function(e) {
+        e.preventDefault();
+        if ($('#howto').length <= 0) {
+          return $.get("" + _this.variables.tpl_path + "howto.tpl").done(function(tpl) {
+            return $('body').append(tpl);
+          });
+        } else {
+          return $('#howto').remove();
+        }
+      });
+      $('body').on('click', '#howto .close', function(e) {
+        e.preventDefault();
+        return $('#howto').remove();
+      });
+      return $('body').on('click', '#wrap', function(e) {
+        e.preventDefault();
+        return $('#howto').remove();
       });
     };
 
@@ -272,7 +290,7 @@
     };
 
     ui.prototype.loggedOut = function() {
-      var content, form, onLogin, rr, status;
+      var content, form, onLogin, rr, status, upload;
       rr = new Rcrtmnt;
       onLogin = this.isContentLoaded('.rnd-form');
       status = rr.getStatus();
@@ -282,10 +300,16 @@
         $('.rnd-user-nav').stop().removeAttr('style').css('display', 'none');
         content.fadeOut().html('');
         form = $('.rnd-form');
-        return form.css({
+        form.css({
           top: "" + (form.height()) + "px",
           display: 'block'
         });
+      }
+      if (status === 0 && (onLogin === false || onLogin === true)) {
+        upload = $('#upload');
+        if (upload.hasClass('show')) {
+          return upload.toggleClass('show');
+        }
       }
     };
 
